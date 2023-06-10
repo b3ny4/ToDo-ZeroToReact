@@ -1,0 +1,21 @@
+<% layout('layout/boilerplate') %>
+    <h1>ToDo List</h1>
+    <div>
+        <% if(!todos || !todos.length) { %>
+            <i>No ToDos. Well Done!</i>
+            <% } else { %>
+                <ul>
+                    <% for(todo of todos) { %>
+                        <li>
+                            <%= todo.content %>
+                                <a href="/<%= todo.id %>/edit">EDIT</a>
+                                <form method="POST" action="/<%= todo.id %>?_method=DELETE">
+                                    <button>DELETE</button>
+                                </form>
+                        </li>
+                        <% } %>
+                </ul>
+                <% } %>
+    </div>
+
+    <a href="/new">Add ToDo</a>

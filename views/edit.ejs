@@ -1,0 +1,9 @@
+<% layout('layout/boilerplate') %>
+    <h1>New ToDo</h1>
+    <form action="/<%= todo.id %>?_method=PUT" method="post">
+        <div>
+            <label for="todo">ToDo:</label>
+            <input type="text" name="todo" id="todo" value="<%= todo.content %>">
+        </div>
+        <button>Save</button>
+    </form>
