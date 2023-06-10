@@ -1,21 +1,26 @@
 <% layout('layout/boilerplate') %>
     <h1>ToDo List</h1>
-    <div>
+    <div class="mb-3">
         <% if(!todos || !todos.length) { %>
             <i>No ToDos. Well Done!</i>
             <% } else { %>
-                <ul>
+                <ul class="list-group">
                     <% for(todo of todos) { %>
-                        <li>
-                            <%= todo.content %>
-                                <a href="/<%= todo.id %>/edit">EDIT</a>
-                                <form method="POST" action="/<%= todo.id %>?_method=DELETE">
-                                    <button>DELETE</button>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div class="my-auto">
+                                <%= todo.content %>
+                            </div>
+                            <div class="my-auto">
+                                <a class="btn btn-info" href="/<%= todo.id %>/edit">EDIT</a>
+                                <form class="d-inline" method="POST" action="/<%= todo.id %>?_method=DELETE">
+                                    <button class="btn btn-danger">DELETE</button>
                                 </form>
+                            </div>
                         </li>
                         <% } %>
                 </ul>
                 <% } %>
     </div>
-
-    <a href="/new">Add ToDo</a>
+    <div class="mb-3">
+        <a class="btn btn-success" href="/new">Add ToDo</a>
+    </div>
