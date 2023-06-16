@@ -1,0 +1,22 @@
+<% layout('layout/boilerplate') %>
+    <h1>New ToDo</h1>
+    <form id="todo_form">
+        <div class="mb-3">
+            <label for="todo" class="form-label">ToDo</label>
+            <input type="text" class="form-control" id="todo" name="todo">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("todo_form");
+        const todoInput = document.getElementById("todo");
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const todo = {
+                todo: todoInput.value
+            };
+            await axios.post('/', todo);
+            window.location.href = '/';
+        }
+    </script>

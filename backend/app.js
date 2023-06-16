@@ -2,37 +2,35 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
-import ejsMate from 'ejs-mate';
+import cors from 'cors';
 import todosController from './controller/todos.js';
 
 // create app
 const app = express();
 
-// configure app
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
+// setup cors policy
+const corsOptions = {
+    origin: "http://localhost:3000"
+}
+app.use(cors(corsOptions));
 
 // configure express middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 // configure routes
 app.route('/')
-    .get(todosController.renderList)
+    .get(todosController.getList)
     .post(todosController.addTodo);
-
-app.get('/new', todosController.renderNew);
 
 
 app.route('/:id')
+    .get(todosController.getTodo)
     .delete(todosController.deleteTodo)
     .put(todosController.updateTodo);
 
-app.get('/:id/edit', todosController.renderEdit);
-
 
 // start server
-app.listen(3000, () => {
-    console.log('Server listening on port 3000');
+app.listen(3001, () => {
+    console.log('Server listening on port 3001');
 });
-
